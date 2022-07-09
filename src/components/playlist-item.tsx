@@ -1,4 +1,5 @@
 import { Col, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { Playlist } from "../interfaces/playlist";
 
 interface PlaylistItemProps {
@@ -7,13 +8,17 @@ interface PlaylistItemProps {
 }
 
 export function PlaylistItem({ playlist }: PlaylistItemProps) {
+  let navigate = useNavigate();
   const videoCount =
     playlist.videoIds.length === 1
       ? "1 video"
       : `${playlist.videoIds.length} videos`;
 
   return (
-    <Row className="border rounded p-2 mb-2">
+    <Row
+      className="border rounded p-2 mb-2"
+      onClick={() => navigate("playlists:" + playlist.id)}
+    >
       <Col xs="12" md="3">
         <h2 className="h5">{playlist.name}</h2>
         <p className="mb-0">{videoCount}</p>
